@@ -1,0 +1,53 @@
+																	Task 2 - Linux basics (Disks and Filesystems)
+																
+For the mount of the USB directory I first identified the name of my USB . I used the command : '$ sudo fdisk -l' . I identified it as /sdd1 . Then I mounted it with the command : ' $ mount /dev/sdd1 /mnt/USB/test ' . ( I created a directory called 'USB' inside of 'mnt' so I can insert my data from my flash drive and then inside 'USB' I created another directory called 'test' where I inserted the large text files ) .
+Here is a proof of the size of the text files inside the 'test' directory : 
+
+┌──(vlad_kali㉿kali-vlad)-[/mnt/USB/test]
+└─$ du -sh /mnt/USB/test   
+2.1G    /mnt/USB/test
+
+
+For the mount of the RAM directory , I created a directory inside the 'tmp' directory on my Linux . I named the directory 'RAM_BUN' with the command 'sudo mount -t tmpfs -o size=3G tmpfs /tmp/RAM_BUN' . This is where I inserted the large text files . 
+Here is a proof of the size of the text files inside the 'RAM_BUN' directory : 
+
+┌──(vlad_kali㉿kali-vlad)-[/tmp/RAM_BUN]
+└─$ du -sh /tmp/RAM_BUN
+2.1G    /tmp/RAM_BUN
+
+How I created the large text files that are inside the USB mounted directory and RAM mounted directory  ? 
+I wanted to create random text files , with the exact size of 2GB . I used the command : 'sudo base64 /dev/urandom | head -c 2G > /mnt/USB/test/textmare.txt' . For the performance test to be as accurate as possible I wanted to have the exactly same text files in both directories so I copied the same text file to the RAM mounted directory . 
+Here is the proof that the  size of the text files from the both directories is actually of 2GB : 
+
+┌──(vlad_kali㉿kali-vlad)-[/tmp/RAM_BUN]
+└─$ du -sh /tmp/RAM_BUN/textmare.txt
+2.0G    /tmp/RAM_BUN/textmare.txt
+
+┌──(vlad_kali㉿kali-vlad)-[/mnt/USB/test]
+└─$ du -sh /mnt/USB/test/textmare.txt
+2.0G    /mnt/USB/test/textmare.txt
+
+I also created a file called 'text.txt' in both directories to insert some random words on my own to test exactly the accuraccy of the program . 
+┌──(vlad_kali㉿kali-vlad)-[/mnt/USB/test]
+└─$ cat text.txt
+vlad
+linux
+sah
+carte
+masina
+linux
+llniux
+xxx
+yyy
+zzz
+
+Error in case not enough string sequences are provided : 
+┌──(vlad_kali㉿kali-vlad)-[/mnt/USB/test]
+└─$ python3 my-reader-USB.py zzzzz                               
+Error: Not enough arguments provided.
+Usage: python3 my-reader.py <input-directory> <string1> <string2> ... <stringn>
+
+Error in case the 'input directory' doesn't exist : 
+┌──(vlad_kali㉿kali-vlad)-[/mnt/USB/test]
+└─$ python3 my-reader-USB.py zzz kkk ooo
+Error: Directory /sdasad does not exist.

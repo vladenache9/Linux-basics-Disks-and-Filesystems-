@@ -1,0 +1,58 @@
+																    Task 2 : Linux basics (Disks and Filesystems)
+
+
+Performance test #1 for RAM-mounted directory /tmp/RAM_BUN  :  
+┌──(vlad_kali㉿kali-vlad)-[/tmp/RAM_BUN]
+└─$ time python3 my-reader.py vlad linux sah carte xxx yyy zzz                                                               
+vlad : 120 occurrences!
+linux : 5 occurrences!
+sah : 7917 occurrences!
+carte : 2 occurrences!
+xxx : 7818 occurrences!
+yyy : 7937 occurrences!
+zzz : 7616 occurrences!
+
+real    0m13.021s
+user    0m11.911s
+sys     0m1.104s
+
+Performance test #1 for USB-mounted directory /mnt/USB/test : 
+┌──(vlad_kali㉿kali-vlad)-[/mnt/USB/test]
+└─$ time python3 my-reader-USB.py vlad linux sah carte xxx yyy zzz
+vlad : 120 occurrences!
+linux : 5 occurrences!
+sah : 7917 occurrences!
+carte : 2 occurrences!
+xxx : 7818 occurrences!
+yyy : 7937 occurrences!
+zzz : 7616 occurrences!
+
+real    0m27.995s
+user    0m14.433s
+sys     0m1.767s
+
+Performance test #2 for RAM-mounted directory /tmp/RAM_BUN  :  
+┌──(vlad_kali㉿kali-vlad)-[/tmp/RAM_BUN]
+└─$ time python3 my-reader.py abc xyz mno
+abc : 7965 occurrences!
+xyz : 7714 occurrences!
+mno : 7814 occurrences!
+
+real    0m7.133s
+user    0m6.095s
+sys     0m1.023s
+
+Performance test #2 for USB-mounted directory /mnt/USB/test : 
+┌──(vlad_kali㉿kali-vlad)-[/mnt/USB/test]
+└─$ time python3 my-reader-USB.py abc xyz mno
+abc : 7965 occurrences!
+xyz : 7714 occurrences!
+mno : 7814 occurrences!
+
+real    0m26.780s
+user    0m11.061s
+sys     0m2.530s
+
+
+
+
